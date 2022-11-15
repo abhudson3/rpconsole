@@ -16,9 +16,9 @@ using System.Threading;
 string menuReturn = "";
 while(menuReturn != "-1"){
     System.Console.WriteLine(@"Welcome to RegiPro! Would you like for the program to register you for a class or notify you when it opens?
-    1. Register for a class
-    2. Notify me when a class opens
-    3. Exit RegiPro");
+1. Register for a class
+2. Notify me when a class opens
+3. Exit RegiPro");
     menuReturn = Console.ReadLine();
     if(menuReturn == "1")
     {
@@ -29,14 +29,8 @@ while(menuReturn != "-1"){
     else if(menuReturn == "2")
     {
         Console.Clear();
-        System.Console.WriteLine("What crn would you like to check?");
-        string crnInput = Console.ReadLine();
-
-        System.Console.WriteLine("Type in the email you would like to use and hit enter");
-        string toEmail = Console.ReadLine();
-        WebDriver driver = new ChromeDriver();
-        driver.Navigate().GoToUrl("https://ssb.ua.edu/pls/PROD/ua_bwckschd.p_disp_detail_sched?term_in=202310&crn_in=" + crnInput);
-        EmailMethod(toEmail, driver);
+        
+        EmailMethod();
 
     }else
     {
@@ -103,8 +97,16 @@ static void regChecker(string mbUsername, string mbPassword, string crnInput, We
 }
 
 
-static void EmailMethod(string toEmail, WebDriver driver)
+static void EmailMethod()
 {
+    System.Console.WriteLine("What crn would you like to check?");
+    string crnInput = Console.ReadLine();
+
+    System.Console.WriteLine("Type in the email you would like to use and hit enter");
+    string toEmail = Console.ReadLine();
+    WebDriver driver = new ChromeDriver();
+    driver.Navigate().GoToUrl("https://ssb.ua.edu/pls/PROD/ua_bwckschd.p_disp_detail_sched?term_in=202310&crn_in=" + crnInput);
+
     regChecker(toEmail, driver);
     static void fileChecker(string toEmail, WebDriver driver){
     StreamReader inFile = new StreamReader("output.txt");
